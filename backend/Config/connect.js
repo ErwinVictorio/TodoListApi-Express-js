@@ -5,7 +5,7 @@ const config = {
   host: "localhost",
   user: "root",
   password: "",
-  database: "todo",
+  database: "todo_app",
 };
 
 let pool;
