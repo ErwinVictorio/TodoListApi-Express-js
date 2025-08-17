@@ -1,4 +1,4 @@
-import { GetAllNotes, createTodo, ShowById, update } from '../Models/Todo.js';
+import { GetAllNotes, createTodo, ShowById, update, TodoDelete } from '../Models/Todo.js';
 
 export async function GetTodo(req, res) {
 
@@ -74,8 +74,40 @@ export async function updateTodo(req, res) {
         return res.status(400).json({ message: 'Failed To Updated' })
     } catch (error) {
 
-        return res.status(500).json({message: `Error: ${error}`})
+        return res.status(500).json({ message: `Error: ${error}` })
     }
+
+}
+
+
+export async function DeleteTdo(req, res) {
+
+    const { TodoId } = req.params;
+
+    try {
+    
+        const result = await TodoDelete(TodoId); // call the model function
+
+        //  to check if the id provided is exist on database
+        if (result.affectedRows === 0) {
+            return res.status(404).json({
+                message: "Todo No Found",
+                affectedRows: result.affectedRows
+            })
+        }
+
+        if (result.affectedRows > 0) { // check if greater than zero yong affected rows meaning successfully updated
+
+            return res.status(201).json({
+                message: 'Successfully Deleted',
+                affectedRows: result.affectedRows
+            })
+        }
+
+    } catch (error) {
+        return res.status(500).json({ message: 'we have server error' . error })
+    }
+
 
 }
 

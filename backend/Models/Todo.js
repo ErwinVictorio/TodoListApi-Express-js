@@ -35,10 +35,23 @@ export async function ShowById(TodoId) {
 
 export async function update(Todo,TodoId){
 
-    const qry = `UPDATE todo SET todo_list = ? WHERE id = ?`;
+    const qry = `UPDATE todo_list SET todo = ? WHERE id = ?`;
     //  execute the query
     const result =  await ExecuteQry(qry,[Todo,TodoId,]);
 
     return result;
 }
+
+
+export async function TodoDelete(TodoId){
+
+    const query = `DELETE FROM todo_list WHERE id = ?`;
+
+    const result = await ExecuteQry(query,[TodoId]);
+    
+    return result;
+}
+
+
+
 

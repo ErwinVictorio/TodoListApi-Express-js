@@ -1,6 +1,6 @@
 import { checkSchema, validationResult } from "express-validator";
 
-// ✅ Validation schema
+// ✅ Validation schema reuse this when you validate same input or like you want to update data and validate before sending the data on database 
 export const todoValidationSchema = checkSchema({
   todo: {
     in: ['body'],               
