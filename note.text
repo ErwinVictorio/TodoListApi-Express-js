@@ -1,0 +1,54 @@
+Good question 🚀 — for auth login/register sa Express + MySQL, ito usually stack na kailangan mo:
+
+🔹 Packages you need to install
+npm install bcrypt jsonwebtoken express-validator
+
+
+bcrypt → for hashing & comparing passwords securely
+
+jsonwebtoken (JWT) → for generating/verifying tokens
+
+express-validator → already gamit mo for validating inputs
+
+(Optional but good practice)
+
+npm install dotenv
+
+
+dotenv → to keep JWT secret, DB credentials, etc. safe sa .env file
+
+🔹 Basic Flow
+
+Register
+
+Validate inputs (email, password, etc.)
+
+Check if user exists in DB
+
+Hash password with bcrypt
+
+Insert user into DB
+
+Return success message (no token yet or auto-login if you prefer)
+
+Login
+
+Validate inputs
+
+Find user by email
+
+Compare password with stored bcrypt hash
+
+If valid, generate JWT token and return to client
+
+Client stores token (localStorage, cookies, etc.)
+
+Protect routes (Middleware)
+
+Middleware checks Authorization: Bearer <token> header
+
+Verify JWT
+
+Attach req.user = decoded token payload
+
+If invalid → return 401 Unauthorized
