@@ -1,5 +1,5 @@
-import { Register } from "../Models/Users";
-import { bcrypt } from 'bcrypt';
+import { Register, checkUserIsExist } from "../Models/Users.js";
+import bcrypt from 'bcrypt';
 
 export async function RegisterUser(req, res) {
 
@@ -9,6 +9,14 @@ export async function RegisterUser(req, res) {
         //  to hash password 
         const saltRounds = 10;
         const HashPassword = await bcrypt.hash(password, saltRounds)
+
+        // first check if the username is already exits
+        
+        if (checkUserIsExist(username).length > 0) {
+            return res.status(400).json({
+                message: 'Username is Already Exist'
+            })
+        }
 
         const result = await Register(full_name, username, HashPassword);
 
