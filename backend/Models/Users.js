@@ -20,3 +20,13 @@ export async function checkUserIsExist(username) {
     return row;
 
 }
+
+
+export async function Login(username){
+
+    const qry = "SELECT * FROM users WHERE username = ?";
+
+    const user = ExecuteRecordSetQry(qry,[username])
+
+    return user;
+}

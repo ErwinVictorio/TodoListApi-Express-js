@@ -1,4 +1,6 @@
 import express from  'express'
+import dotenv from 'dotenv';
+dotenv.config(); // load the value
 const app = express()
 import cors from 'cors';
 import router  from './Routes/TodoRoutes.js';

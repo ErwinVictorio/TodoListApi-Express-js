@@ -21,9 +21,9 @@ export async function GetTodo(req, res) {
 export async function TodoCreate(req, res) {
 
     try {
-        const { todo } = req.body;
-        await createTodo(todo); // execute the query
+        const { todo,userId } = req.body;
 
+        await createTodo(todo,userId); // execute the query
         return res.status(201).json({ message: `Successfully Created Todo ${todo}`, });
 
     } catch (error) {

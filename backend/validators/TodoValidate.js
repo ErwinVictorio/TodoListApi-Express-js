@@ -8,6 +8,13 @@ export const todoValidationSchema = checkSchema({
     notEmpty: {
       errorMessage: "todo is required",
     }
+  },
+  userId: {
+    in: ['body'],
+    trim:true,
+    notEmpty:{
+      errorMessage: "please Provide UserId"
+    }
   }
 });
 

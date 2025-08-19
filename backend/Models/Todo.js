@@ -2,7 +2,7 @@ import { ExecuteRecordSetQry, ExecuteQry } from '../Config/connect.js';
 
 // for select * query
 export async function GetAllNotes() {
-    const qry = `SELECT * FROM todo_list`;
+    const qry = `SELECT * FROM todos`;
 
     const rows = await ExecuteRecordSetQry(qry)
 
@@ -11,10 +11,10 @@ export async function GetAllNotes() {
 
 
 
-export async function createTodo(todo) {
+export async function createTodo(todo,userId) {
 
-    const qry = `INSERT INTO todo_list (todo) values(?)`;
-    const result = await ExecuteQry(qry, [todo])
+    const qry = `INSERT INTO todos (todo,user_id) values(?,?)`;
+    const result = await ExecuteQry(qry, [todo,userId])
 
     return result;
 }
@@ -24,7 +24,7 @@ export async function createTodo(todo) {
 export async function ShowById(TodoId) {
 
 
-    const qry = `SELECT * FROM todo_list WHERE id  = ?`;
+    const qry = `SELECT * FROM todos WHERE id  = ?`;
 
     const rows = await ExecuteRecordSetQry(qry, [TodoId]);
 
@@ -35,7 +35,7 @@ export async function ShowById(TodoId) {
 
 export async function update(Todo,TodoId){
 
-    const qry = `UPDATE todo_list SET todo = ? WHERE id = ?`;
+    const qry = `UPDATE todos SET todo = ? WHERE id = ?`;
     //  execute the query
     const result =  await ExecuteQry(qry,[Todo,TodoId,]);
 
@@ -45,7 +45,7 @@ export async function update(Todo,TodoId){
 
 export async function TodoDelete(TodoId){
 
-    const query = `DELETE FROM todo_list WHERE id = ?`;
+    const query = `DELETE FROM todos WHERE id = ?`;
 
     const result = await ExecuteQry(query,[TodoId]);
     
