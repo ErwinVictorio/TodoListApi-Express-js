@@ -1,4 +1,5 @@
 import { Register, checkUserIsExist, Login } from "../Models/Users.js";
+import { GenerateToken } from "../HelperMethod/Tokens.js";
 import bcrypt from 'bcrypt';
 
 export async function RegisterUser(req, res) {
@@ -11,8 +12,9 @@ export async function RegisterUser(req, res) {
         const HashPassword = await bcrypt.hash(password, saltRounds)
 
         // first check if the username is already exits
+        const userExist  =  await checkUserIsExist(username);
         
-        if ( await checkUserIsExist(username)) {
+        if (userExist.length > 0) {
             return res.status(400).json({
                 message: 'Username is Already Exist'
             })
@@ -66,10 +68,11 @@ export async function login(req,res){
         })
     }
 
-
     //  if match the generate token
+   const token = GenerateToken(user)
     
-
-
-
+   return res.status(200).json({
+     message: "Successfully Login",
+     token: token,
+   })
 }

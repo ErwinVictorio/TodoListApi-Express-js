@@ -3,10 +3,11 @@ import dotenv from 'dotenv';
 
 dotenv.config(); // make sure env is loaded
 
+
 // MySQL config
 const config = {
   host: process.env.DB_HOST,
-  user: process.env.DB_USER,
+  user: process.env.DB_USER || "root  ",
   password: process.env.DB_PASSWORD || "",
   database: process.env.DB_NAME
 };
