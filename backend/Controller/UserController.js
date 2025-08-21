@@ -1,5 +1,5 @@
-import { Register, checkUserIsExist, Login } from "../Models/Users.js";
-import { GenerateToken } from "../HelperMethod/Tokens.js";
+import { Register, checkUserIsExist } from "../Models/Users.js";
+
 import bcrypt from 'bcrypt';
 
 export async function RegisterUser(req, res) {
@@ -48,31 +48,10 @@ export async function RegisterUser(req, res) {
 
 export async function login(req,res){
 
-    const { username , password } = req.body
 
-    const user = await Login(username);
-
-    if (!user) { // check if we have result
-        return res.status(400).json({
-            message: "Account Not Found"
-        })
-    }
-
-    // then if we have result then check if the password match to the plain text from password input
-     
-    const isMatch = await bcrypt.compare(password, user.password);
-
-    if (!isMatch) {
-        return res.status(401).json({
-            message: 'Invalid username or password'
-        })
-    }
-
-    //  if match the generate token
-   const token = GenerateToken(user)
-    
    return res.status(200).json({
      message: "Successfully Login",
-     token: token,
+     user: req.user,
+     token: req.token,
    })
 }
