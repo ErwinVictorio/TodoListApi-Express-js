@@ -23,7 +23,6 @@ export async function createTodo(todo,userId) {
 
 export async function ShowById(TodoId) {
 
-
     const qry = `SELECT * FROM todos WHERE id  = ?`;
 
     const rows = await ExecuteRecordSetQry(qry, [TodoId]);

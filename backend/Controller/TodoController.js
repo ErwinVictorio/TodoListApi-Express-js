@@ -91,7 +91,7 @@ export async function DeleteTdo(req, res) {
         //  to check if the id provided is exist on database
         if (result.affectedRows === 0) {
             return res.status(404).json({
-                message: "Todo No Found",
+                message: "Todo Not Found",
                 affectedRows: result.affectedRows
             })
         }

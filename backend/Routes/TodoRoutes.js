@@ -11,14 +11,14 @@ import { LoginValidateInput } from '../validators/loginValidateInput.js';
 
 
 
-// protected routes
+//protected routes
 router.get('/', authMiddleware,GetTodo);
 router.get('/:TodoId',authMiddleware,Show);
 router.post('/create', authMiddleware, todoValidationSchema, handleValidationInputs,TodoCreate);
 router.put('/:TodoId',authMiddleware,todoValidationSchema, handleValidationInputs, updateTodo);
 router.delete('/:TodoId',DeleteTdo);
 
-// unprotected routes
+//unprotected routes
 router.post('/register-account',RegisterValidationForm,handleValidationInputs,RegisterUser);
 router.post('/login',LoginValidateInput,loginMidleware,login);
 
